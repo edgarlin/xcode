@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import CoreLocation
 
 
-class ViewController: UIViewController {
+
+class ViewController: UIViewController , CLLocationManagerDelegate{
+    
+    let locationManager:CLLocationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        locationManager.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        locationManager.startUpdatingLocation()
+        
     }
-
-
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        for currentLocation in locations {
+            debugPrint("\(index):\(currentLocation)")
+        }
+    }
 }
 
